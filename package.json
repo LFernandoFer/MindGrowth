@@ -1,0 +1,24 @@
+{
+  "name": "mindgrowth",
+  "version": "2.0.0",
+  "description": "Sistema Web para Organização e Cálculo de Soft Skills no Ensino Fundamental e Médio",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "soft-skills",
+    "educacao",
+    "avaliacao-socioemocional",
+    "ensino-fundamental",
+    "ensino-medio"
+  ],
+  "author": "MindGrowth Team",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7"
+  }
+}

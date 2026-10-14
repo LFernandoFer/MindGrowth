@@ -1,0 +1,86 @@
+================================================================================
+                    MINDGROWTH - PASSO A PASSO PARA OUTRA MAQUINA
+================================================================================
+
+Este projeto e uma aplicacao web (Front-end JS + Back-end Node.js + Banco MySQL)
+voltada a organizacao e ao calculo automatizado de soft skills.
+
+--------------------------------------------------------------------------------
+1. PRE-REQUISITOS NA NOVA MAQUINA
+--------------------------------------------------------------------------------
+Antes de rodar, a maquina precisa ter instalado:
+  a) XAMPP (para o banco de dados MySQL e o phpMyAdmin)
+     Download: https://www.apachefriends.org
+  b) Node.js (versao 18 ou superior)
+     Download: https://nodejs.org
+
+--------------------------------------------------------------------------------
+2. PASSO A PASSO DE INSTALACAO E EXECUCAO
+--------------------------------------------------------------------------------
+
+PASSO 1: LIGAR O BANCO NO XAMPP
+  1. Abra o "XAMPP Control Panel".
+  2. Clique em "Start" ao lado do servico "MySQL".
+  3. (Opcional) Clique em "Start" no "Apache" se quiser abrir o phpMyAdmin
+     no navegador em: http://localhost/phpmyadmin
+
+PASSO 2: IMPORTAR O BANCO DE DADOS (NO PHPMYADMIN)
+  1. Abra o navegador e acesse: http://localhost/phpmyadmin
+  2. No menu superior, clique em "Importar" (ou crie a base "mindgrowth").
+  3. Clique em "Escolher arquivo" e selecione o arquivo:
+     "mindgrowth.sql" (presente na pasta do projeto).
+  4. Role ate o fim da pagina e clique no botao "Executar" / "Importar".
+  *OBS: O proprio servidor Node.js tambem cria e importa o banco automaticamente
+   se ele ainda nao existir na primeira vez que for iniciado!
+
+PASSO 3: INSTALAR AS DEPENDENCIAS DO NODE (SE NECESSARIO)
+  Se você copiou a pasta para outra máquina sem a pasta "node_modules":
+  1. Abra o Prompt de Comando (CMD) ou PowerShell dentro da pasta do projeto.
+  2. Digite o comando abaixo e aperte Enter:
+     npm install
+
+PASSO 4: INICIAR O SISTEMA
+  Basta dar um DUPLO CLIQUE no arquivo:
+     iniciar_sistema.bat
+  (Ou abrir o terminal na pasta e digitar: npm start)
+
+  O terminal mostrara a mensagem:
+  ====================================================
+    MindGrowth - Servidor Node.js em Execucao!
+    Acesse: http://localhost:3000
+    MySQL Host: localhost:3306
+    Banco: mindgrowth
+  ====================================================
+
+PASSO 5: ACESSAR NO NAVEGADOR
+  Abra seu navegador (Chrome, Edge, Firefox) e acesse:
+     http://localhost:3000
+
+--------------------------------------------------------------------------------
+3. USUARIOS GENERICOS PARA TESTE E APRESENTACAO
+--------------------------------------------------------------------------------
+Na tela de login ha botoes de preenchimento rapido, ou voce pode digitar:
+
+  - ALUNO (Lucas Silva):
+    Usuario: aluno.demo
+    Senha:   123456
+
+  - ALUNA (Mariana Oliveira):
+    Usuario: mariana.aluna
+    Senha:   123456
+
+  - PROFESSOR (Prof. Carlos Eduardo Santos):
+    Usuario: prof.carlos
+    Senha:   123456
+
+  - COORDENACAO (Coord. Helena Vasconcelos):
+    Usuario: coord.helena
+    Senha:   123456
+
+--------------------------------------------------------------------------------
+4. VERIFICACAO DE STATUS
+--------------------------------------------------------------------------------
+Ao abrir qualquer pagina do sistema, observe o canto inferior direito:
+  🟢 Conectado ao MySQL (XAMPP / Node) -> Tudo funcionando e gravando no banco.
+  🟡 Modo Local (Cache)                -> Backend ou MySQL desligado (usa cache).
+================================================================================

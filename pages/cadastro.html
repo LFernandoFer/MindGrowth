@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindGrowth — Cadastro</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <script src="../scripts/dataStore.js" defer></script>
+    <script src="../scripts/validaForm.js" defer></script>
+    <script src="../scripts/cadastro.js" defer></script>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" role="navigation">Início</a>
+        <a href="cadastro.html" class="ativo" role="navigation">Cadastrar</a>
+        <a href="login.html" role="navigation">Login</a>
+    </nav>
+
+    <main>
+        <div class="banner">
+            <h1>MindGrowth</h1>
+        </div>
+
+        <form id="formCad" name="formCad">
+            <h1 id="h1">Cadastre-se</h1>
+
+            <p>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+
+                <label for="usuarioLogin">Usuário:</label>
+                <input type="text" id="usuarioLogin" name="usuarioLogin" placeholder="Usuário de acesso" required>
+            </p>
+
+            <p>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" placeholder="Senha" required>
+            </p>
+
+            <p>
+                <label for="confirmarSenha">Confirmar senha:</label>
+                <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme a senha" required>
+
+                <label for="telefone">Telefone:</label>
+                <input id="telefone" name="telefone" type="tel" maxlength="14" placeholder="(xx)xxxxx-xxxx">
+            </p>
+
+            <p class="campo-duplo">
+                <label for="idade">Idade:</label>
+                <input id="idade" name="idade" type="number" placeholder="Idade" min="1" max="100">
+            </p>
+
+            <p>
+                <label>Sexo:</label>
+                <span class="campo-inline">
+                    <input type="radio" id="sexoMasc" name="sexo" value="M" checked>
+                    <label for="sexoMasc">Masculino</label>
+                </span>
+                <span class="campo-inline">
+                    <input type="radio" id="sexoFem" name="sexo" value="F">
+                    <label for="sexoFem">Feminino</label>
+                </span>
+            </p>
+
+            <p>
+                <label for="perfil">Perfil:</label>
+                <select id="perfil" name="perfil">
+                    <option value="ALUNO">Aluno</option>
+                    <option value="PROFESSOR">Professor</option>
+                    <option value="COORDENADOR">Coordenador</option>
+                </select>
+            </p>
+
+            <p>
+                <input type="checkbox" id="termos" name="termos" required>
+                Você concorda com os termos de uso?
+            </p>
+
+            <p>
+                <button type="submit" id="submit" class="btn btn-enviar">Enviar</button>
+                <button type="reset" class="btn btn-limpar">Limpar</button>
+            </p>
+
+            <p id="error-message"></p>
+            <p id="success-message"></p>
+        </form>
+
+        <p class="auth-link">
+            Já tem uma conta? <a href="login.html">Faça login</a>
+        </p>
+    </main>
+</body>
+</html>

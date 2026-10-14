@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindGrowth — Login</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <script src="../scripts/dataStore.js" defer></script>
+    <script src="../scripts/validaForm.js" defer></script>
+    <script src="../scripts/login.js" defer></script>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" role="navigation">Início</a>
+        <a href="cadastro.html" role="navigation">Cadastrar</a>
+        <a href="login.html" class="ativo" role="navigation">Login</a>
+    </nav>
+
+    <main>
+        <div class="banner">
+            <h1>MindGrowth</h1>
+        </div>
+       
+        <form id="formLogin" name="formLogin">
+            <h1 id="h1">Acesso ao Sistema</h1>
+
+            <p>
+                <label for="usuario">Usuário ou E-mail:</label>
+                <input type="text" id="usuario" name="usuario" placeholder="Ex: aluno.demo ou email@escola.edu.br" required>
+            </p>
+
+            <p>
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" placeholder="Sua senha de acesso" required>
+            </p>
+
+            <p class="acoes-form">
+                <button type="submit" id="submit" class="btn btn-enviar">Entrar</button>
+                <button type="reset" class="btn btn-limpar">Limpar</button>
+            </p>
+
+            <p id="error-message"></p>
+            <p id="success-message"></p>
+
+            <div class="card-demo">
+                <p class="demo-title"><strong>Perfis de Demonstração Rápida:</strong></p>
+                <div class="demo-buttons">
+                    <button type="button" class="btn-demo" onclick="preencherDemo('aluno.demo', '123456')">
+                        🎓 Entrar como Aluno
+                    </button>
+                    <button type="button" class="btn-demo" onclick="preencherDemo('prof.carlos', '123456')">
+                        👨‍🏫 Entrar como Professor
+                    </button>
+                    <button type="button" class="btn-demo" onclick="preencherDemo('coord.helena', '123456')">
+                        📊 Entrar como Coordenador
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <p class="auth-link">
+            Não tem uma conta? <a href="cadastro.html">Cadastre-se aqui</a>
+        </p>
+    </main>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindGrowth — Relatórios Analíticos & Dashboards</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <!-- Chart.js para renderização de gráficos analíticos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="../scripts/dataStore.js" defer></script>
+    <script src="../scripts/validaForm.js" defer></script>
+    <script src="../scripts/relatorios.js" defer></script>
+</head>
+<body>
+    <nav class="nav-dashboard">
+        <div class="nav-brand">
+            <a href="../index.html" class="nav-logo">MindGrowth</a>
+            <span class="badge badge-perfil">Painel de Inteligência Pedagógica</span>
+        </div>
+        <div class="nav-links">
+            <a href="professor.html">Minhas Turmas</a>
+            <a href="relatorios.html" class="ativo">Relatórios Analíticos</a>
+            <button type="button" class="btn-sair" onclick="logout()">Sair</button>
+        </div>
+    </nav>
+
+    <main class="main-dashboard">
+        <!-- Banner de Perfil / Acesso -->
+        <section class="card-usuario-header">
+            <div class="usuario-info-principal">
+                <div class="avatar-circulo">📊</div>
+                <div>
+                    <h2 id="nomeUsuarioRelatorio">Carregando painel...</h2>
+                    <p class="usuario-detalhes">
+                        Perfil: <strong id="perfilUsuarioRelatorio">Coordenação Pedagógica</strong> • 
+                        Ano Letivo: <strong>2026</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="acoes-topo-relatorio">
+                <button type="button" id="btnImprimirRelatorio" class="btn btn-sm btn-limpar">
+                    🖨️ Imprimir / Salvar PDF
+                </button>
+            </div>
+        </section>
+
+        <!-- Filtros Analíticos Globais -->
+        <section class="painel-secao">
+            <div class="secao-titulo-container">
+                <h2>🔍 Filtros Analíticos</h2>
+                <p class="secao-subtitulo">Cruze dados por turma, disciplina e período avaliativo para gerar visões estratégicas.</p>
+            </div>
+
+            <div class="barra-filtros-relatorios">
+                <div class="campo-filtro">
+                    <label for="filtroTurma"><strong>Turma:</strong></label>
+                    <select id="filtroTurma"></select>
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="filtroDisciplina"><strong>Disciplina:</strong></label>
+                    <select id="filtroDisciplina"></select>
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="filtroPeriodo"><strong>Período Letivo:</strong></label>
+                    <select id="filtroPeriodo"></select>
+                </div>
+            </div>
+        </section>
+
+        <!-- KPIs Estratégicos -->
+        <section class="grid-kpis">
+            <div class="card-kpi">
+                <span class="kpi-icon">📈</span>
+                <div class="kpi-info">
+                    <span class="kpi-valor" id="kpiMediaGeral">0.0</span>
+                    <span class="kpi-label">Média Geral Consolidada (NFskill)</span>
+                </div>
+            </div>
+
+            <div class="card-kpi">
+                <span class="kpi-icon">🎓</span>
+                <div class="kpi-info">
+                    <span class="kpi-valor" id="kpiMediaAA">0.0</span>
+                    <span class="kpi-label">Média Autoavaliação Alunos (AA)</span>
+                </div>
+            </div>
+
+            <div class="card-kpi">
+                <span class="kpi-icon">👨‍🏫</span>
+                <div class="kpi-info">
+                    <span class="kpi-valor" id="kpiMediaAP">0.0</span>
+                    <span class="kpi-label">Média Avaliação Docente (AP)</span>
+                </div>
+            </div>
+
+            <div class="card-kpi">
+                <span class="kpi-icon">📑</span>
+                <div class="kpi-info">
+                    <span class="kpi-valor" id="kpiTotalAvaliacoes">0</span>
+                    <span class="kpi-label">Registros Processados</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Destaques Pedagógicos -->
+        <section class="grid-destaques-pedagogicos">
+            <div class="card-destaque card-ponto-forte">
+                <span class="destaque-tag">🌟 Ponto Forte da Turma</span>
+                <h3 id="kpiPontoForte">Em análise</h3>
+                <p>Competência com maior média de proficiência observada.</p>
+            </div>
+
+            <div class="card-destaque card-ponto-atencao">
+                <span class="destaque-tag">🎯 Foco para Intervenção</span>
+                <h3 id="kpiPontoAtencao">Em análise</h3>
+                <p>Competência recomendada para projetos socioemocionais específicos.</p>
+            </div>
+        </section>
+
+        <!-- Gráficos Analíticos -->
+        <section class="grid-graficos-dashboard">
+            <!-- Gráfico 1: Radar Comparativo AA x AP x NF -->
+            <div class="painel-grafico">
+                <div class="grafico-header">
+                    <h3>🕸️ Comparativo de Percepção (Alunos x Professores)</h3>
+                    <p class="grafico-subtitulo">Identificação de convergências e discrepâncias nas 6 soft skills.</p>
+                </div>
+                <div class="chart-canvas-box">
+                    <canvas id="chartRadarGeral"></canvas>
+                </div>
+            </div>
+
+            <!-- Gráfico 2: Ranking de Competências -->
+            <div class="painel-grafico">
+                <div class="grafico-header">
+                    <h3>📊 Ranking Médio de Soft Skills</h3>
+                    <p class="grafico-subtitulo">Desempenho consolidado por competência (1.0 a 5.0).</p>
+                </div>
+                <div class="chart-canvas-box">
+                    <canvas id="chartBarGeral"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gráfico 3: Evolução Temporal -->
+        <section class="painel-secao">
+            <div class="secao-titulo-container">
+                <h3>📅 Evolução Longitudinal ao Longo do Ano Letivo</h3>
+                <p class="secao-subtitulo">Monitoramento da curva de aprendizagem socioemocional entre os bimestres.</p>
+            </div>
+            <div class="chart-canvas-box" style="height: 280px;">
+                <canvas id="chartEvolucaoPeriodos"></canvas>
+            </div>
+        </section>
+
+        <!-- Tabela Analítica de Conselho de Classe -->
+        <section class="painel-secao">
+            <div class="secao-titulo-container">
+                <h2>📑 Tabela Consolidada para Conselho Pedagógico</h2>
+                <p class="secao-subtitulo">Visão nominal dos alunos com indicadores detalhados por competência.</p>
+            </div>
+
+            <div class="tabela-container">
+                <table class="tabela-mindgrowth">
+                    <thead>
+                        <tr>
+                            <th>Estudante</th>
+                            <th>Matrícula</th>
+                            <th>Avaliações</th>
+                            <th>Soft Skills (Notas NFskill)</th>
+                            <th class="text-center">Média Geral do Aluno</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaConsolidadaBody">
+                        <!-- Gerado dinamicamente pelo relatorios.js -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-dashboard">
+        <p>MindGrowth © 2026 — Sistema de Avaliação e Acompanhamento de Soft Skills</p>
+    </footer>
+</body>
+</html>

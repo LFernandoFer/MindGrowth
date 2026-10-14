@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindGrowth — Portal do Aluno</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <!-- Chart.js para visualização de relatórios/radar -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="../scripts/dataStore.js" defer></script>
+    <script src="../scripts/validaForm.js" defer></script>
+    <script src="../scripts/aluno.js" defer></script>
+</head>
+<body>
+    <nav class="nav-dashboard">
+        <div class="nav-brand">
+            <a href="../index.html" class="nav-logo">MindGrowth</a>
+            <span class="badge badge-perfil">Área do Aluno</span>
+        </div>
+        <div class="nav-links">
+            <a href="#autoavaliacao" class="ativo">Autoavaliação</a>
+            <a href="#historico">Meu Histórico</a>
+            <a href="#grafico">Gráfico Socioemocional</a>
+            <button type="button" class="btn-sair" onclick="logout()">Sair</button>
+        </div>
+    </nav>
+
+    <main class="main-dashboard">
+        <!-- Banner de Perfil do Aluno -->
+        <section class="card-usuario-header">
+            <div class="usuario-info-principal">
+                <div class="avatar-circulo">🎓</div>
+                <div>
+                    <h2 id="nomeAluno">Carregando aluno...</h2>
+                    <p class="usuario-detalhes">
+                        <span id="emailAluno">aluno@unifafibe.edu.br</span> • 
+                        <strong id="turmaAluno">Turma</strong> • 
+                        Matrícula: <span id="matriculaNum">MAT-0000</span>
+                    </p>
+                </div>
+            </div>
+            <div class="tag-ano-letivo">Ano Letivo: <strong>2026</strong></div>
+        </section>
+
+        <!-- Seção de Autoavaliação -->
+        <section id="autoavaliacao" class="painel-secao">
+            <div class="secao-titulo-container">
+                <h2>📝 Realizar Autoavaliação de Soft Skills</h2>
+                <p class="secao-subtitulo">Avalie seu próprio desenvolvimento nas competências socioemocionais em uma escala de 1 a 5.</p>
+            </div>
+
+            <div id="statusPreenchimento" class="status-box"></div>
+
+            <form id="formAutoavaliacao" class="form-avaliacao-card">
+                <div class="filtros-inline">
+                    <div class="campo-seletor">
+                        <label for="selectDisciplina"><strong>Disciplina:</strong></label>
+                        <select id="selectDisciplina" name="disciplina" required></select>
+                    </div>
+
+                    <div class="campo-seletor">
+                        <label for="selectPeriodo"><strong>Período Avaliativo:</strong></label>
+                        <select id="selectPeriodo" name="periodo" required></select>
+                    </div>
+                </div>
+
+                <hr class="divisor">
+
+                <!-- Grade de Competências -->
+                <div id="containerCompetencias" class="grid-competencias">
+                    <!-- Gerado dinamicamente pelo aluno.js -->
+                </div>
+
+                <div id="msgSucesso" class="alerta-sucesso" style="display: none;"></div>
+
+                <div class="acoes-formulario-avaliacao">
+                    <button type="submit" class="btn btn-enviar btn-lg">💾 Gravar Minha Autoavaliação</button>
+                    <button type="reset" class="btn btn-limpar">Limpar Seleções</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Seção de Histórico de Avaliações -->
+        <section id="historico" class="painel-secao">
+            <div class="secao-titulo-container">
+                <h2>📊 Meu Histórico de Avaliações</h2>
+                <p class="secao-subtitulo">Acompanhe suas notas de autoavaliação (AA), as notas atribuídas pelos docentes (AP) e sua média final calculada (NFskill = (AA+AP)/2).</p>
+            </div>
+
+            <div class="tabela-container">
+                <table class="tabela-mindgrowth">
+                    <thead>
+                        <tr>
+                            <th>Competência</th>
+                            <th>Disciplina</th>
+                            <th>Período</th>
+                            <th class="text-center">Sua Autoavaliação (AA)</th>
+                            <th class="text-center">Nota do Docente (AP)</th>
+                            <th class="text-center">Índice Final (NFskill)</th>
+                            <th>Feedback Pedagógico</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaHistoricoBody">
+                        <!-- Gerado dinamicamente pelo aluno.js -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Seção de Gráfico Radar -->
+        <section id="grafico" class="painel-secao">
+            <div class="secao-titulo-container">
+                <h2>📈 Mapa Radar de Competências Socioemocionais</h2>
+                <p class="secao-subtitulo">Visualização comparativa entre a sua percepção pessoal e a percepção dos professores.</p>
+            </div>
+
+            <div class="chart-wrapper">
+                <canvas id="chartRadarAluno" height="320"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-dashboard">
+        <p>MindGrowth © 2026 — Sistema de Avaliação e Acompanhamento de Soft Skills</p>
+    </footer>
+</body>
+</html>

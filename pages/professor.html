@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindGrowth — Painel do Professor</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <script src="../scripts/dataStore.js" defer></script>
+    <script src="../scripts/validaForm.js" defer></script>
+    <script src="../scripts/professor.js" defer></script>
+</head>
+<body>
+    <nav class="nav-dashboard">
+        <div class="nav-brand">
+            <a href="../index.html" class="nav-logo">MindGrowth</a>
+            <span class="badge badge-perfil">Área do Docente</span>
+        </div>
+        <div class="nav-links">
+            <a href="professor.html" class="ativo">Minhas Turmas</a>
+            <a href="relatorios.html">Relatórios Analíticos</a>
+            <button type="button" class="btn-sair" onclick="logout()">Sair</button>
+        </div>
+    </nav>
+
+    <main class="main-dashboard">
+        <!-- Banner de Perfil do Professor -->
+        <section class="card-usuario-header">
+            <div class="usuario-info-principal">
+                <div class="avatar-circulo">👨‍🏫</div>
+                <div>
+                    <h2 id="nomeProfessor">Carregando professor...</h2>
+                    <p class="usuario-detalhes">
+                        <span id="emailProfessor">professor@unifafibe.edu.br</span> • 
+                        Membro do Corpo Docente
+                    </p>
+                </div>
+            </div>
+            <div class="tag-ano-letivo">Ano Letivo: <strong>2026</strong></div>
+        </section>
+
+        <!-- Filtros de Turma / Disciplina / Período -->
+        <section class="painel-secao">
+            <div class="secao-titulo-container">
+                <h2>🎯 Seleção da Turma e Período de Avaliação</h2>
+                <p class="secao-subtitulo">Selecione a turma e disciplina para visualizar a listagem de discentes e lançar as notas de soft skills.</p>
+            </div>
+
+            <div class="barra-filtros-professor">
+                <div class="campo-filtro">
+                    <label for="selectTurma"><strong>Turma:</strong></label>
+                    <select id="selectTurma"></select>
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="selectDisciplina"><strong>Disciplina:</strong></label>
+                    <select id="selectDisciplina"></select>
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="selectPeriodo"><strong>Período:</strong></label>
+                    <select id="selectPeriodo"></select>
+                </div>
+
+                <div class="campo-filtro-acao">
+                    <button type="button" id="btnIniciarEtapa" class="btn btn-destaque" title="Gera o insert inicial de avaliação para todos os alunos da turma">
+                        ➕ Abrir Ciclo de Avaliação
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Métricas / KPIs da Turma -->
+        <section class="grid-kpis">
+            <div class="card-kpi">
+                <span class="kpi-icon">👥</span>
+                <div class="kpi-info">
+                    <span class="kpi-valor" id="kpiTotalAlunos">0</span>
+                    <span class="kpi-label">Alunos na Turma</span>
+                </div>
+            </div>
+
+            <div class="card-kpi">
+                <span class="kpi-icon">📝</span>
+                <div class="kpi-info">
+                    <span class="kpi-valor" id="kpiAAConcluidas">0</span>
+                    <span class="kpi-label">Autoavaliações Concluídas</span>
+                </div>
+            </div>
+
+            <div class="card-kpi">
+                <span class="kpi-icon">⏳</span>
+                <div class="kpi-info">
+                    <span class="kpi-valor" id="kpiAPPendentes">0</span>
+                    <span class="kpi-label">Avaliações Docentes Pendentes</span>
+                </div>
+            </div>
+
+            <div class="card-kpi">
+                <span class="kpi-icon">⭐</span>
+                <div class="kpi-info">
+                    <span class="kpi-valor" id="kpiMediaTurma">0.0</span>
+                    <span class="kpi-label">Média NFskill da Turma</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabela de Alunos -->
+        <section class="painel-secao">
+            <div class="secao-titulo-container">
+                <h2>📋 Alunos Matriculados e Status das Avaliações</h2>
+                <p class="secao-subtitulo">Clique em "Avaliar" para abrir a tela de composição de notas com cálculo automatizado em tempo real.</p>
+            </div>
+
+            <div class="tabela-container">
+                <table class="tabela-mindgrowth">
+                    <thead>
+                        <tr>
+                            <th>Aluno</th>
+                            <th>Matrícula</th>
+                            <th class="text-center">Autoavaliação (AA)</th>
+                            <th class="text-center">Avaliação Docente (AP)</th>
+                            <th class="text-center">Índice Final (NFskill)</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaAlunosTurmaBody">
+                        <!-- Gerado dinamicamente pelo professor.js -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-dashboard">
+        <p>MindGrowth © 2026 — Sistema de Avaliação e Acompanhamento de Soft Skills</p>
+    </footer>
+</body>
+</html>

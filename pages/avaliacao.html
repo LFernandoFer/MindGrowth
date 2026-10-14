@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindGrowth — Avaliação de Soft Skills</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <script src="../scripts/dataStore.js" defer></script>
+    <script src="../scripts/validaForm.js" defer></script>
+    <script src="../scripts/avaliacao.js" defer></script>
+</head>
+<body>
+    <nav class="nav-dashboard">
+        <div class="nav-brand">
+            <a href="../index.html" class="nav-logo">MindGrowth</a>
+            <span class="badge badge-perfil">Composição Avaliativa</span>
+        </div>
+        <div class="nav-links">
+            <a href="professor.html">← Voltar para Minhas Turmas</a>
+            <a href="relatorios.html">Relatórios</a>
+            <button type="button" class="btn-sair" onclick="logout()">Sair</button>
+        </div>
+    </nav>
+
+    <main class="main-dashboard">
+        <!-- Banner de Contexto da Avaliação -->
+        <section class="card-usuario-header card-avaliacao-header">
+            <div class="usuario-info-principal">
+                <div class="avatar-circulo">📐</div>
+                <div>
+                    <h2>Avaliação Individual de Soft Skills</h2>
+                    <div class="tags-contexto">
+                        <span class="tag-item">Aluno: <strong id="infoAlunoNome">-</strong></span>
+                        <span class="tag-item">Matrícula: <strong id="infoAlunoMatricula">-</strong></span>
+                        <span class="tag-item">Turma: <strong id="infoTurma">-</strong></span>
+                        <span class="tag-item">Disciplina: <strong id="infoDisciplina">-</strong></span>
+                        <span class="tag-item">Período: <strong id="infoPeriodo">-</strong></span>
+                        <span class="tag-item">Professor: <strong id="infoProfessor">-</strong></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulário de Composição de Notas e Cálculo -->
+        <form id="formAvaliacaoDocente" class="painel-secao form-avaliacao-card">
+            <div class="secao-titulo-container">
+                <h2>⚖️ Atribuição de Notas e Cálculo Automatizado (NFskill)</h2>
+                <p class="secao-subtitulo">
+                    Fórmula definida no artigo: 
+                    <code>NFskill = (Autoavaliação [AA] + Avaliação Professor [AP]) / 2</code>
+                </p>
+            </div>
+
+            <!-- Grade com as 6 competências -->
+            <div id="gradeAvaliacaoDocente" class="grid-avaliacao-docente">
+                <!-- Gerado dinamicamente pelo avaliacao.js -->
+            </div>
+
+            <!-- Campo de Observações Qualitativas -->
+            <div class="campo-observacao-docente">
+                <label for="observacoesGerais"><strong>📝 Parecer Pedagógico / Observações Qualitativas:</strong></label>
+                <textarea id="observacoesGerais" rows="4" placeholder="Insira feedbacks formativos, orientações socioemocionais ou pontos observados no desenvolvimento do discente..."></textarea>
+            </div>
+
+            <!-- Resumo e Ações -->
+            <div class="painel-resumo-final">
+                <div class="resumo-kpi-media">
+                    <span>Média Geral do Aluno:</span>
+                    <strong id="mediaGeralCalculada">-</strong>
+                </div>
+
+                <div id="msgSucessoAvaliacao" class="alerta-sucesso" style="display: none;"></div>
+
+                <div class="acoes-formulario-avaliacao">
+                    <button type="submit" class="btn btn-enviar btn-lg">💾 Salvar e Consolidar Avaliação</button>
+                    <a href="professor.html" class="btn btn-limpar">Cancelar e Voltar</a>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <footer class="footer-dashboard">
+        <p>MindGrowth © 2026 — Sistema de Avaliação e Acompanhamento de Soft Skills</p>
+    </footer>
+</body>
+</html>
