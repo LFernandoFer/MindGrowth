@@ -7,8 +7,9 @@
 const MG_STORAGE_PREFIX = 'mindgrowth_';
 
 // URL base da API Node.js
-const API_BASE = window.location.protocol.startsWith('http') ? '' : 'http://localhost:3000';
-
+const API_BASE = window.location.protocol.startsWith('http')
+    ? ''
+    : 'http://localhost:3000';
 // Chaves de armazenamento local (cache / fallback)
 const KEYS = {
     USUARIOS: MG_STORAGE_PREFIX + 'usuarios',
