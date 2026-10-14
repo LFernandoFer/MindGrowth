@@ -1,4 +1,4 @@
-/**
+ /**
  * MindGrowth - dataStore.js
  * Camada de gerenciamento de dados e persistência (compatível com Banco de Dados v2.0)
  * Integrado ao Back-end Node.js e MySQL (XAMPP/phpMyAdmin)
@@ -7,7 +7,7 @@
 const MG_STORAGE_PREFIX = 'mindgrowth_';
 
 // URL base da API Node.js
-const API_BASE = (window.location.protocol.startsWith('http') && window.location.port === '3000')
+const API_BASE = window.location.protocol.startsWith('http')
     ? ''
     : 'http://localhost:3000';
 

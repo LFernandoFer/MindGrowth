@@ -21,13 +21,13 @@ app.use(express.urlencoded({ extended: true }));
 // Servir arquivos estáticos do front-end
 app.use(express.static(path.join(__dirname)));
 
-// Configuração da Conexão com o MySQL do XAMPP
+// Configuração da Conexão com o MySQL (Suporta XAMPP local e Railway/Cloud)
 const dbConfig = {
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 3306,
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'mindgrowth',
+    host: process.env.DB_HOST || process.env.MYSQLHOST || 'localhost',
+    port: Number(process.env.DB_PORT || process.env.MYSQLPORT || 3306),
+    user: process.env.DB_USER || process.env.MYSQLUSER || 'root',
+    password: process.env.DB_PASSWORD || process.env.MYSQLPASSWORD || '',
+    database: process.env.DB_NAME || process.env.MYSQLDATABASE || 'mindgrowth',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
@@ -46,33 +46,40 @@ function getPool() {
 // Inicializador / Verificador do Banco de Dados
 async function inicializarBancoSeNecessario() {
     try {
-        // Conexão inicial sem banco para verificar se o banco mindgrowth existe
-        const tempConn = await mysql.createConnection({
-            host: dbConfig.host,
-            port: dbConfig.port,
-            user: dbConfig.user,
-            password: dbConfig.password,
-            multipleStatements: true
-        });
+        const isRemote = Boolean(process.env.MYSQLHOST || process.env.DB_HOST);
 
-        await tempConn.query("CREATE DATABASE IF NOT EXISTS mindgrowth CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
-        await tempConn.end();
+        // Se for ambiente local (XAMPP), garante a criação do banco mindgrowth
+        if (!isRemote) {
+            const tempConn = await mysql.createConnection({
+                host: dbConfig.host,
+                port: dbConfig.port,
+                user: dbConfig.user,
+                password: dbConfig.password,
+                multipleStatements: true
+            });
+            await tempConn.query(`CREATE DATABASE IF NOT EXISTS \`${dbConfig.database}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`);
+            await tempConn.end();
+        }
 
         // Agora verifica se a tabela usuarios existe no banco
         const p = getPool();
         const [tables] = await p.query("SHOW TABLES LIKE 'usuarios'");
         if (tables.length === 0) {
-            console.log("Banco 'mindgrowth' sem tabelas. Importando mindgrowth.sql...");
+            console.log(`Banco '${dbConfig.database}' sem tabelas. Importando mindgrowth.sql...`);
             const sqlPath = path.join(__dirname, 'mindgrowth.sql');
             if (fs.existsSync(sqlPath)) {
-                const sqlContent = fs.readFileSync(sqlPath, 'utf-8');
+                let sqlContent = fs.readFileSync(sqlPath, 'utf-8');
+                // Em ambiente de nuvem, remove os comandos de criação/troca de banco para evitar erro de permissão
+                if (isRemote) {
+                    sqlContent = sqlContent.replace(/CREATE DATABASE[\s\S]*?USE\s+\w+;/i, '');
+                }
                 const connWithMulti = await mysql.createConnection({
                     ...dbConfig,
                     multipleStatements: true
                 });
                 await connWithMulti.query(sqlContent);
                 await connWithMulti.end();
-                console.log("Banco 'mindgrowth' importado com sucesso via mindgrowth.sql!");
+                console.log(`Banco '${dbConfig.database}' importado com sucesso via mindgrowth.sql!`);
             }
         }
     } catch (err) {
